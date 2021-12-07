@@ -1,6 +1,21 @@
+import requests
+from parsel import Selector
+from time import sleep
+
+
 # Requisito 1
+# https://softbranchdevelopers.com/python-requests-library-exception-handling-advanced-request-get-parameters/#all-exceptions
 def fetch(url):
-    """Seu código deve vir aqui"""
+    resp = ''
+    try:
+        sleep(1)
+        resp = requests.get(url, timeout=3)
+    except requests.exceptions.RequestException:
+        return None
+    finally:
+        if resp != '' and resp.status_code == 200:
+            return resp.text
+        return None
 
 
 # Requisito 2
@@ -21,3 +36,5 @@ def scrape_next_page_link(html_content):
 # Requisito 5
 def get_tech_news(amount):
     """Seu código deve vir aqui"""
+
+print(fetch('https://app.betrybe.com/'))
