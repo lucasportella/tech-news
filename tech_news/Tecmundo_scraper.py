@@ -8,7 +8,6 @@ class Scrap_tecmundo:
         self.shares_count = self.find_shares_count()
         self.comments_count = self.find_comments_count()
         self.summary = self.find_summary()
-
         self.sources = self.find_sources()
         self.categories = self.find_categories()
 
