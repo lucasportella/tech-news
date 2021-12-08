@@ -1,7 +1,7 @@
 import requests
 from parsel import Selector
 from time import sleep
-from tech_news.Scraper_helper import Scrap
+from tech_news.Tecmundo_scraper import Scrap_tecmundo
 
 
 # Requisito 1
@@ -22,8 +22,8 @@ def fetch(url):
 # Requisito 2
 def scrape_noticia(html_content):
     selector = Selector(text=html_content)
-    scraped_site = Scrap(selector)
-    print(scraped_site.get_url())
+    scraped_news = Scrap_tecmundo(selector)
+    print(scraped_news.url)
 
 
 content = fetch(
