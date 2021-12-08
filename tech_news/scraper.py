@@ -23,14 +23,14 @@ def fetch(url):
 def scrape_noticia(html_content):
     selector = Selector(text=html_content)
     scraped_news = Scrap_tecmundo(selector)
-    return scraped_news.find_writer()
+    return scraped_news.mount()
 
 
-content = fetch(
-    "https://www.tecmundo.com.br/ciencia/215205-nasa-assistir-primeiro-voo-ingenuity-marte.htm"
-)
+# content = fetch(
+#     "https://www.tecmundo.com.br/seguranca/215274-pmes-principais-alvos-ataques-ciberneticos.htm"
+# )
 
-print(scrape_noticia(content))
+# print(scrape_noticia(content))
 
 
 # Requisito 3

@@ -4,11 +4,7 @@ class Scrap_tecmundo:
         self.url = selector.css("head > link[rel=canonical]::attr(href)").get()
         self.title = selector.css(".tec--article__header__title::text").get()
         self.timestamp = selector.css("time::attr(datetime)").get()
-        self.writer = (
-            (selector.css(".tec--author__info__link::text").get()).strip()
-            if selector.css(".tec--author__info__link::text").get() != None
-            else None
-        )
+        self.writer = self.find_writer()
         # no idea why this works since array returns False
         self.shares_count = (
             int(selector.css(".tec--toolbar__item::text").re(r"\d+")[0])
@@ -29,7 +25,7 @@ class Scrap_tecmundo:
         self.sources = [
             source.strip()
             for source in selector.css(
-                ".tec--article__body-grid  div:nth-child(6) *::text"
+                ".z--mb-16 > div > a::text"
             ).getall()
             if source not in [" ", "Fontes"]
         ]
@@ -43,11 +39,14 @@ class Scrap_tecmundo:
         query_selectors = [
             ".tec--author__info__link::text",
             ".tec--timestamp a::text",
-            "#js-author-bar",
+            "#js-author-bar > div p::text",
         ]
-
-        test = self.selector.css("#js-author-bar p a::text").get()
-        print(test)
+        for query in query_selectors:
+            result = self.selector.css(query).get()
+            if result is not None:
+                print(result)
+                return result.strip()
+        return None
 
     def mount(self):
         return {
