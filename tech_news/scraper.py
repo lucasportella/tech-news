@@ -37,14 +37,18 @@ def scrape_novidades(html_content):
     return fresh_news
 
 
-content = fetch("https://www.tecmundo.com.br/novidades")
-
-print(scrape_novidades(content))
-
 # Requisito 4
 def scrape_next_page_link(html_content):
-    """Seu código deve vir aqui"""
+    selector = Selector(text=html_content)
+    next_page = selector.css(
+        "#js-main .tec--btn::attr(href)"
+    ).get()
+    return next_page
 
+
+content = fetch("https://www.tecmundo.com.br/novidades")
+
+print(scrape_next_page_link(content))
 
 # Requisito 5
 def get_tech_news(amount):

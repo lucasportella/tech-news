@@ -115,14 +115,14 @@ def test_scrape_novidades():
 
 
 # # Req.4
-# def test_scrape_next_page_link():
-#     with open("tests/assets/tecmundo_pages/novidades.html") as f:
-#         html_content = f.read()
-#     expected = "https://www.tecmundo.com.br/novidades?page=2"
-#     # retorna os dados esperados quando chamada com os parâmetros corretos
-#     assert scrape_next_page_link(html_content) == expected
-#     # retorna None quando chamada com os parâmetros incorretos
-#     assert scrape_next_page_link("") is None
+def test_scrape_next_page_link():
+    with open("tests/assets/tecmundo_pages/novidades.html") as f:
+        html_content = f.read()
+    expected = "https://www.tecmundo.com.br/novidades?page=2"
+    # retorna os dados esperados quando chamada com os parâmetros corretos
+    assert scrape_next_page_link(html_content) == expected
+    # retorna None quando chamada com os parâmetros incorretos
+    assert scrape_next_page_link("") is None
 
 
 # def mocked_fetch(url):
