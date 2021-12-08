@@ -4,18 +4,26 @@ class Scrap_tecmundo:
         self.url = selector.css("head > link[rel=canonical]::attr(href)").get()
         self.title = selector.css(".tec--article__header__title::text").get()
         self.timestamp = selector.css("time::attr(datetime)").get()
-        self.writer = selector.css(".tec--author__info__link::text").get()
+        self.writer = (
+            (selector.css(".tec--author__info__link::text").get()).strip()
+            if selector.css(".tec--author__info__link::text").get() != None
+            else None
+        )
         # no idea why this works since array returns False
         self.shares_count = (
             int(selector.css(".tec--toolbar__item::text").re(r"\d+")[0])
             if selector.css(".tec--toolbar__item::text").re(r"\d+")
             else 0
         )
-        self.comments_count = int(
-            selector.css("#js-comments-btn::text").re(r"\d+")[0]
+        self.comments_count = (
+            int(selector.css("#js-comments-btn::text").re(r"\d+")[0])
+            if selector.css("#js-comments-btn::text").re(r"\d+")
+            else 0
         )
         self.summary = "".join(
-            selector.css(".tec--article__body > p *::text").getall()
+            selector.css(
+                ".tec--article__body > p:nth-child(1) *::text"
+            ).getall()
         )
         # > doest work, only empty space
         self.sources = [
@@ -28,8 +36,18 @@ class Scrap_tecmundo:
         self.categories = [
             category.strip()
             for category in selector.css("#js-categories *::text").getall()
-            if category != ' '
+            if category != " "
         ]
+
+    def find_writer(self):
+        query_selectors = [
+            ".tec--author__info__link::text",
+            ".tec--timestamp a::text",
+            "#js-author-bar",
+        ]
+
+        test = self.selector.css("#js-author-bar p a::text").get()
+        print(test)
 
     def mount(self):
         return {
@@ -41,5 +59,5 @@ class Scrap_tecmundo:
             "comments_count": self.comments_count,
             "summary": self.summary,
             "sources": self.sources,
-            "categories": self.categories
+            "categories": self.categories,
         }
