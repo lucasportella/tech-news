@@ -26,17 +26,20 @@ def scrape_noticia(html_content):
     return scraped_news.mount()
 
 
-content = fetch(
-    "https://www.tecmundo.com.br/mobilidade-urbana-smart-cities/155000-musk-tesla-carros-totalmente-autonomos.htm"
-)
-
-print(scrape_noticia(content))
-
-
 # Requisito 3
+# header Notícias have more hidden news with class .tec--card__title__link, so
+#  use id #js-main to restrict to only main news
 def scrape_novidades(html_content):
-    """Seu código deve vir aqui"""
+    selector = Selector(text=html_content)
+    fresh_news = selector.css(
+        "#js-main .tec--card__title__link::attr(href)"
+    ).getall()
+    return fresh_news
 
+
+content = fetch("https://www.tecmundo.com.br/novidades")
+
+print(scrape_novidades(content))
 
 # Requisito 4
 def scrape_next_page_link(html_content):

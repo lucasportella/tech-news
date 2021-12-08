@@ -103,15 +103,15 @@ def test_scrape_noticia(noticia_html_v1, noticia_html_v2, noticia_html_v3):
     assert scrape_noticia(noticia_html_v3) == all_news[11]
 
 
-# # Req.3
-# def test_scrape_novidades():
-#     with open("tests/assets/tecmundo_pages/novidades.html") as f:
-#         html_content = f.read()
-#     expected = urls_from_novidades
-#     # retorna os dados esperados quando chamada com os parâmetros corretos
-#     assert scrape_novidades(html_content) == expected
-#     # retorna uma lista vazia quando chamada com parâmetros incorretos
-#     assert scrape_novidades("") == []
+# Req.3
+def test_scrape_novidades():
+    with open("tests/assets/tecmundo_pages/novidades.html") as f:
+        html_content = f.read()
+    expected = urls_from_novidades
+    # retorna os dados esperados quando chamada com os parâmetros corretos
+    assert scrape_novidades(html_content) == expected
+    # retorna uma lista vazia quando chamada com parâmetros incorretos
+    assert scrape_novidades("") == []
 
 
 # # Req.4
