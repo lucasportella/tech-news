@@ -14,11 +14,21 @@ class Scrap_tecmundo:
         self.comments_count = int(
             selector.css("#js-comments-btn::text").re(r"\d+")[0]
         )
-        self.summary = ''.join(selector.css(".tec--article__body > p *::text").getall())
+        self.summary = "".join(
+            selector.css(".tec--article__body > p *::text").getall()
+        )
+        # > doest work, only empty space
+        self.sources = [
+            source.strip()
+            for source in selector.css(
+                ".tec--article__body-grid  div:nth-child(6) *::text"
+            ).getall()
+            if source not in [" ", "Fontes"]
+        ]
 
     def mount(self):
-        a = self.selector.css(".tec--toolbar__item::text").re(r"\d+")
-        print(a)
-        print(
-            self.selector.css(".tec--toolbar__item::text").re(r"\d+") is True
-        )
+        a = self.selector.css(
+            ".tec--article__body-grid  div:nth-child(6) *::text"
+        ).getall()
+        for source in a:
+            print(type(source))
