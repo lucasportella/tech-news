@@ -3,7 +3,7 @@ class Scrap_tecmundo:
         self.selector = selector
         self.url = selector.css("head > link[rel=canonical]::attr(href)").get()
         self.title = selector.css(".tec--article__header__title::text").get()
-        self.time = selector.css("time::attr(datetime)").get()
+        self.timestamp = selector.css("time::attr(datetime)").get()
         self.writer = selector.css(".tec--author__info__link::text").get()
         # no idea why this works since array returns False
         self.shares_count = (
@@ -25,10 +25,21 @@ class Scrap_tecmundo:
             ).getall()
             if source not in [" ", "Fontes"]
         ]
+        self.categories = [
+            category.strip()
+            for category in selector.css("#js-categories *::text").getall()
+            if category != ' '
+        ]
 
     def mount(self):
-        a = self.selector.css(
-            ".tec--article__body-grid  div:nth-child(6) *::text"
-        ).getall()
-        for source in a:
-            print(type(source))
+        return {
+            "url": self.url,
+            "title": self.title,
+            "timestamp": self.timestamp,
+            "writer": self.writer,
+            "shares_count": self.shares_count,
+            "comments_count": self.comments_count,
+            "summary": self.summary,
+            "sources": self.sources,
+            "categories": self.categories
+        }

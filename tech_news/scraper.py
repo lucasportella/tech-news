@@ -23,7 +23,7 @@ def fetch(url):
 def scrape_noticia(html_content):
     selector = Selector(text=html_content)
     scraped_news = Scrap_tecmundo(selector)
-    print(scraped_news.sources)
+    print(scraped_news.mount())
 
 
 content = fetch(
