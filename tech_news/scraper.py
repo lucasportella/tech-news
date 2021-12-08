@@ -26,11 +26,11 @@ def scrape_noticia(html_content):
     return scraped_news.mount()
 
 
-# content = fetch(
-#     "https://www.tecmundo.com.br/seguranca/215274-pmes-principais-alvos-ataques-ciberneticos.htm"
-# )
+content = fetch(
+    "https://www.tecmundo.com.br/mobilidade-urbana-smart-cities/155000-musk-tesla-carros-totalmente-autonomos.htm"
+)
 
-# print(scrape_noticia(content))
+print(scrape_noticia(content))
 
 
 # Requisito 3
