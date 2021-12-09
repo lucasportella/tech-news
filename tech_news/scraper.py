@@ -46,17 +46,21 @@ def scrape_next_page_link(html_content):
 
 # Requisito 5
 def get_tech_news(amount):
-    pass
-    # pagination = ''
-    # html_content = fetch(f"https://www.tecmundo.com.br/novidades" + {pagination})
-    # latest_news = scrape_novidades(html_content)
-    # while len(latest_news) < amount:
-    #     html_content2 = scrape_next_page_link(html_content)
-    #     latest_news.extend(scrape_novidades(html_content))
-    # print(len(latest_news))
+    pagination = ""
+    base_url = "https://www.tecmundo.com.br/novidades"
+    html_content = fetch(base_url + pagination)
+    latest_news = scrape_novidades(html_content)
+
+    while len(latest_news) < amount:
+        pagination = (
+            scrape_next_page_link(html_content)
+            ).split("/novidades")[1]
+        html_content = fetch(base_url + pagination)
+        latest_news.extend(scrape_novidades(html_content))
+    print(len(latest_news))
 
 
-# get_tech_news(60)
+get_tech_news(90)
 
 
 # //////////////////////////////
