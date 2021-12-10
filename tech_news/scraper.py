@@ -57,10 +57,11 @@ def get_tech_news(amount):
             ).split("/novidades")[1]
         html_content = fetch(base_url + pagination)
         latest_news.extend(scrape_novidades(html_content))
-    print(len(latest_news))
+    requested_news = latest_news[:amount]
+    print(requested_news)
 
 
-get_tech_news(90)
+get_tech_news(7)
 
 
 # //////////////////////////////
