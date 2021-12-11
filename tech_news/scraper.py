@@ -1,6 +1,7 @@
 import requests
 from parsel import Selector
 from time import sleep
+from pymongo import MongoClient
 from tech_news.Tecmundo_scraper import Scrap_tecmundo
 
 
@@ -45,6 +46,16 @@ def scrape_next_page_link(html_content):
 
 
 # Requisito 5
+def add_news_to_database(requested_news):
+    client = MongoClient()
+    db = client.tech_news
+    for url in requested_news:
+        html_content = fetch(url)
+        new = scrape_noticia(html_content)
+        db.news.insert_one(new)
+        # needs to return inserted news
+
+
 def get_tech_news(amount):
     pagination = ""
     base_url = "https://www.tecmundo.com.br/novidades"
@@ -52,13 +63,13 @@ def get_tech_news(amount):
     latest_news = scrape_novidades(html_content)
 
     while len(latest_news) < amount:
-        pagination = (
-            scrape_next_page_link(html_content)
-            ).split("/novidades")[1]
+        pagination = (scrape_next_page_link(html_content)).split("/novidades")[
+            1
+        ]
         html_content = fetch(base_url + pagination)
         latest_news.extend(scrape_novidades(html_content))
     requested_news = latest_news[:amount]
-    print(requested_news)
+    return add_news_to_database(requested_news)
 
 
 get_tech_news(7)
