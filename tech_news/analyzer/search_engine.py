@@ -1,6 +1,13 @@
-# Requisito 6
+from tech_news.database import db
+
+
+# https://kb.objectrocket.com/mongo-db/how-to-query-mongodb-documents-with-regex-in-python-362
 def search_by_title(title):
-    """Seu código deve vir aqui"""
+    news = db.news.find(
+        {"title": {"$regex": title, "$options": "i"}},
+        {"title": 1, "url": 1, "_id": 0},
+    )
+    return [(new["title"], new["url"]) for new in news]
 
 
 # Requisito 7
