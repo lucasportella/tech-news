@@ -14,11 +14,9 @@ def search_by_title(title):
 def search_by_date(date):
     # https://www.tutorialspoint.com/How-to-do-date-validation-in-Python
     date_string = date
-    date_format = '%Y-%m-%d'
+    date_format = "%Y-%m-%d"
     try:
-        date_obj = (
-            datetime.datetime.strptime(date_string, date_format)
-            )
+        date_obj = datetime.datetime.strptime(date_string, date_format)
         str_date = str(date_obj.date())
     except ValueError:
         raise ValueError("Data inválida")
@@ -39,7 +37,9 @@ def search_by_source(source):
     return [(new["title"], new["url"]) for new in news]
 
 
-
-# Requisito 9
 def search_by_category(category):
-    """Seu código deve vir aqui"""
+    news = db.news.find(
+        {"categories": {"$regex": category, "$options": "i"}},
+        {"title": 1, "url": 1, "_id": 0},
+    )
+    return [(new["title"], new["url"]) for new in news]
