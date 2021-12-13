@@ -66,33 +66,33 @@ def test_buscar_noticia_pela_data():
         search_by_date("1968-02-30")
 
 
-# def test_buscar_noticia_pela_fonte():
-#     db.news.delete_many({})
-#     db.news.insert_one(NEW_NOTICE)
-#     assert search_by_source("ResetEra") == LIST
+def test_buscar_noticia_pela_fonte():
+    db.news.delete_many({})
+    db.news.insert_one(NEW_NOTICE)
+    assert search_by_source("ResetEra") == LIST
     
-#     # fonte que não existe retorna lista vazia
-#     db.news.delete_many({})
-#     db.news.insert_one(NEW_NOTICE)
-#     assert search_by_source("fonte_invalida") == []
+    # fonte que não existe retorna lista vazia
+    db.news.delete_many({})
+    db.news.insert_one(NEW_NOTICE)
+    assert search_by_source("fonte_invalida") == []
 
-#     # trata casos case-sensitive
-#     db.news.delete_many({})
-#     db.news.insert_one(NEW_NOTICE)
-#     assert search_by_source("RESETERA") == LIST
+    # trata casos case-sensitive
+    db.news.delete_many({})
+    db.news.insert_one(NEW_NOTICE)
+    assert search_by_source("RESETERA") == LIST
 
 
-# def test_buscar_noticia_pela_categoria():
-#     db.news.delete_many({})
-#     db.news.insert_one(NEW_NOTICE)
-#     assert search_by_category("Console") == LIST
+def test_buscar_noticia_pela_categoria():
+    db.news.delete_many({})
+    db.news.insert_one(NEW_NOTICE)
+    assert search_by_category("Console") == LIST
 
-#     # categoria inexistente retorna lista vazia
-#     db.news.delete_many({})
-#     db.news.insert_one(NEW_NOTICE)
-#     assert search_by_category("categoria_invalida") == []
+    # categoria inexistente retorna lista vazia
+    db.news.delete_many({})
+    db.news.insert_one(NEW_NOTICE)
+    assert search_by_category("categoria_invalida") == []
 
-#     # trata casos case-sensitive
-#     db.news.delete_many({})
-#     db.news.insert_one(NEW_NOTICE)
-#     assert search_by_category("CONSOLE") == LIST
+    # trata casos case-sensitive
+    db.news.delete_many({})
+    db.news.insert_one(NEW_NOTICE)
+    assert search_by_category("CONSOLE") == LIST
