@@ -15,4 +15,4 @@ In this project, I've created a web scrapper for the site tecmundo.com.br, you c
    - ***python3 -m venv .venv && source .venv/bin/activate***
    - ***python3 -m pip install -r dev-requirements.txt***
    - ***tech-news-analyzer***
- - Select an option from the menu (select 0 to populate database)
+ - Select an option from the menu (select 0 then the number of news you want to populate database)
