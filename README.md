@@ -4,6 +4,12 @@
 ### Description
 In this project, I've created a web scrapper for the site tecmundo.com.br, you can utilize a menu to find tecmundo news and search their news by title, date, source and category.
 
+<div>
+    <img width=500  src="https://github.com/lucasportella/tech-news/blob/master/picture1.png"> 
+    <img width=20   src="https://github.com/lucasportella/tech-news/blob/master/picture3.png">
+    <img width=400  src="https://github.com/lucasportella/tech-news/blob/master/picture2.png">
+<div>
+
 ### Requirements
 - python3
 - mongoDB server running on your local machine
